@@ -7,15 +7,11 @@
 <body>
 <h1 th:text="${title}"></h1>
 
-<p th:unless="${vacations} and ${vacations.size()}">Nothing here!</p>
+<form method="post">
+    <input type="text" name="vacationName" />
+    <input type="submit" value="Add Trip" />
 
-<a href="/add">Add Trip</a>
-
-<ul>
-    <li th:each="vacation : ${vacations}" th:text="${vacation}"></li>
-
-</ul>
-
+</form>
 
 </body>
 </html>
