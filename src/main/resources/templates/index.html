@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8" />
-    <title th:text="${title}"></title>
-</head>
-<body>
-<h1 th:text="${title}"></h1>
+<head th:replace="fragments :: head"></head>
 
-<p th:unless="${vacations} and ${vacations.size()}">Nothing here!</p>
+<body class="container body-content">
 
-<a href="/add">Add Trip</a>
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${trips} and ${trips.size()}">Nothing here yet!</p>
+
+<table class="table">
+
+    <tr>
+        <th>Trip Name</th>
+        <th>Trip Description</th>
+    </tr>
+
+    <tr th:each="trip : ${trips}">
+        <td th:text="${trip.name}"></td>
+        <td th:text="${trip.description}"></td>
+
+    </tr>
+
+</table>
 
 <ul>
-    <li th:each="vacation : ${vacations}" th:text="${vacation}"></li>
+    <li th:each="trip : ${trips}" th:text="${trip}"></li>
 
 </ul>
 

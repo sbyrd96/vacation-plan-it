@@ -1,4 +1,4 @@
-package com.liftoff.vacationplanit;
+package org.liftoff.vacationplanit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
