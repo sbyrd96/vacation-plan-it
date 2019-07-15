@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
-<body class="container body-content">
+<body class="container">
 
 <h1 th:text="${title}">Default Title</h1>
 
@@ -13,8 +13,8 @@
 <table class="table">
 
     <tr>
-        <th>Trip Name</th>
-        <th>Trip Description</th>
+        <th>Name</th>
+        <th>Description</th>
     </tr>
 
     <tr th:each="trip : ${trips}">
@@ -24,11 +24,6 @@
     </tr>
 
 </table>
-
-<ul>
-    <li th:each="trip : ${trips}" th:text="${trip}"></li>
-
-</ul>
 
 
 </body>
