@@ -13,6 +13,8 @@ public class Trip {
     @Size(min=1, message = "Trip Description must not be empty.")
     private String description;
 
+    private TripType type;
+
     private int tripId;
     private static int nextId = 1;
 
@@ -51,4 +53,7 @@ public class Trip {
         this.description = description;
     }
 
+    public TripType getType() { return type; }
+
+    public void setType(TripType type) { this.type = type; }
 }

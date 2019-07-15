@@ -2,6 +2,7 @@ package org.liftoff.vacationplanit.controllers;
 
 import org.liftoff.vacationplanit.models.Trip;
 import org.liftoff.vacationplanit.models.TripData;
+import org.liftoff.vacationplanit.models.TripType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -33,6 +34,7 @@ public class MainController {
     public String displayAddTripForm(Model model) {
         model.addAttribute("title", "Add Trip");
         model.addAttribute(new Trip());
+        model.addAttribute("tripTypes", TripType.values());
         return "add";
     }
 

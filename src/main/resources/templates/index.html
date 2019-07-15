@@ -13,13 +13,15 @@
 <table class="table">
 
     <tr>
-        <th>Name</th>
-        <th>Description</th>
+        <th>Trip Name</th>
+        <th>Trip Description</th>
+        <th>Trip Type</th>
     </tr>
 
     <tr th:each="trip : ${trips}">
         <td th:text="${trip.name}"></td>
         <td th:text="${trip.description}"></td>
+        <td th:text="${trip.type.name}"></td>
 
     </tr>
 
