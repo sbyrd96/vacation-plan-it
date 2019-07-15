@@ -4,11 +4,13 @@ import org.liftoff.vacationplanit.models.Trip;
 import org.liftoff.vacationplanit.models.TripData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 
@@ -30,12 +32,20 @@ public class MainController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddTripForm(Model model) {
         model.addAttribute("title", "Add Trip");
+        model.addAttribute(new Trip());
         return "add";
     }
 
     //handler to process the add form
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddTripForm(@ModelAttribute Trip newTrip) {
+    public String processAddTripForm(@ModelAttribute @Valid Trip newTrip,
+                                     Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Trip");
+            return "add";
+        }
+
         TripData.add(newTrip);
         return "redirect:";
     }
