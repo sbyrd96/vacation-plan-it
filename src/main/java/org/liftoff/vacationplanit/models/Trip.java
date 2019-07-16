@@ -1,9 +1,17 @@
 package org.liftoff.vacationplanit.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Trip {
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     @Size(min=3, max=100)
@@ -15,27 +23,14 @@ public class Trip {
 
     private TripType type;
 
-    private int tripId;
-    private static int nextId = 1;
-
     public Trip(String name, String description) {
-        this();
         this.name = name;
         this.description = description;
     }
 
-    public Trip() {
-        tripId = nextId;
-        nextId++;
-    }
+    public Trip() { }
 
-    public int getTripId() {
-        return tripId;
-    }
-
-    public void setTripId(int tripId) {
-        this.tripId = tripId;
-    }
+    public int getId() { return id; }
 
     public String getName() {
         return name;

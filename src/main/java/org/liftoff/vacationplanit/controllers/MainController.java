@@ -1,8 +1,9 @@
 package org.liftoff.vacationplanit.controllers;
 
 import org.liftoff.vacationplanit.models.Trip;
-import org.liftoff.vacationplanit.models.TripData;
 import org.liftoff.vacationplanit.models.TripType;
+import org.liftoff.vacationplanit.models.data.TripDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,19 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 
 @Controller
 @RequestMapping("")
 public class MainController {
 
+    @Autowired
+    private TripDao tripDao;
 
     //handler to display the index page
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("trips", TripData.getAll());
+        model.addAttribute("trips", tripDao.findAll());
         model.addAttribute("title", "Vacation Plan-it");
         return "index";
     }
@@ -48,14 +50,14 @@ public class MainController {
             return "add";
         }
 
-        TripData.add(newTrip);
+        tripDao.save(newTrip);
         return "redirect:";
     }
 
     //handler to display the remove form
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveTripForm(Model model) {
-        model.addAttribute("trips", TripData.getAll());
+        model.addAttribute("trips", tripDao.findAll());
         model.addAttribute("title", "Remove Trip");
         return "remove";
     }
@@ -65,7 +67,7 @@ public class MainController {
     public String processRemoveTripForm(@RequestParam int[] tripIds) {
 
        for (int tripId : tripIds) {
-           TripData.remove(tripId);
+           tripDao.delete(tripId);
        }
     return "redirect:";
 
