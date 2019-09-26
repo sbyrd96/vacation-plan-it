@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" th:object="${form}" action="/plan/add-item">
+
+    <div class="form-group">
+        <label th:for="tripId">Trip</label>
+        <select name="tripId">
+            <option th:each="trip : *{trips}"
+                    th:text="${trip.name}"
+                    th:value="${trip.uid}"</option>
+        </select>
+
+        <span th:errors="*{tripId}"></span>
+
+    </div>
+
+    <input type="hidden" name="planId" th:value="*{plan.uid}" />
+
+    <input type="submit" value="Add Item" />
+</form>
+</body>
+</html>

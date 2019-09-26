@@ -1,32 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
+<head th:replace="template :: head"></head>
 
-<body class="container">
+<body>
 
-<h1 th:text="${title}">Default Title</h1>
-
-<nav th:replace="fragments :: navigation"></nav>
-
-<p th:unless="${trips} and ${trips.size()}">Nothing here yet!</p>
-
-<table class="table">
-
-    <tr>
-        <th>Trip Name</th>
-        <th>Trip Description</th>
-        <th>Trip Type</th>
-    </tr>
-
-    <tr th:each="trip : ${trips}">
-        <td th:text="${trip.name}"></td>
-        <td th:text="${trip.description}"></td>
-        <td th:text="${trip.type.name}"></td>
-
-    </tr>
-
-</table>
-
+<nav>
+    <a href="/login">Log In</a>
+    <a href="/register">Register</a>
+</nav>
 
 </body>
 </html>

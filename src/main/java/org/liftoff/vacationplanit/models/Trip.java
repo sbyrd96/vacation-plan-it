@@ -1,17 +1,15 @@
 package org.liftoff.vacationplanit.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
-public class Trip {
+public class Trip extends AbstractEntity{
 
-    @Id
-    @GeneratedValue
-    private int id;
+    @ManyToOne
+    private User owner;
 
     @NotNull
     @Size(min=3, max=100)
@@ -21,7 +19,11 @@ public class Trip {
     @Size(min=1, message = "Trip Description must not be empty.")
     private String description;
 
-    private TripType type;
+    @ManyToOne
+    private Category category;
+
+    @ManyToMany(mappedBy = "trips")
+    private List <Plan> plans;
 
     public Trip(String name, String description) {
         this.name = name;
@@ -29,8 +31,6 @@ public class Trip {
     }
 
     public Trip() { }
-
-    public int getId() { return id; }
 
     public String getName() {
         return name;
@@ -48,7 +48,11 @@ public class Trip {
         this.description = description;
     }
 
-    public TripType getType() { return type; }
+    public Category getCategory() { return category; }
 
-    public void setType(TripType type) { this.type = type; }
+    public void setCategory(Category category) { this.category = category; }
+
+    public User getOwner() { return owner; }
+
+    public void setOwner(User owner) { this.owner = owner; }
 }

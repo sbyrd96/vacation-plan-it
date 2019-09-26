@@ -5,6 +5,7 @@
     <meta charset="UTF-8"/>
     <title th:text="${title}">My Trips</title>
 
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
@@ -12,12 +13,30 @@
 
 <body>
 
-<nav th:fragment="navigation">
-    <a href="/">Home Page</a> |
-    <a href="/add">Add a Trip</a> |
-    <a href="/remove">Remove Trip</a>
+<div th:fragment="navigation">
 
-</nav>
+    <div th:if="${userId}">
 
+        <nav class="user-nav">
+            <a href="/logout">Log Out</a>
+        </nav>
+
+        <nav>
+            <a href="/trip">Home</a>
+            <a href="/category">Categories</a>
+            <a href="/plan">Plans</a>
+        </nav>
+
+    </div>
+
+    <div th:unless="${userId}">
+        <nav>
+            <a href="/login">Log In</a>
+            <a href="/register">Register</a>
+        </nav>
+
+    </div>
+
+</div>
 </body>
 </html>

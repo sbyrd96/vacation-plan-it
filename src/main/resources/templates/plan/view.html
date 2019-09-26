@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<ul>
+    <li th:each="trip : ${plan.trips}" th:text="${trip.name}"></li>
+</ul>
+
+<p th:unless="${plan.trips.size()}"><i>No trips yet</i></p>
+
+<p><a th:href="'/plan/add-item/' + ${plan.uid}">Add Trip</a></p>
+
+</body>
+</html>
